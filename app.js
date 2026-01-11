@@ -7,6 +7,29 @@ function normalize(s) {
     .replace(/\s+/g, " ");
 }
 
+const hintBtn = document.getElementById("hintBtn");
+const resetStatsBtn = document.getElementById("resetStatsBtn");
+const sessionStatsEl = document.getElementById("sessionStats");
+const perSpecimenStatsEl = document.getElementById("perSpecimenStats");
+
+function statsKey(mode) {
+  return `rmtrainer_stats_v1_${mode}`;
+}
+
+function loadStats(mode) {
+  try {
+    return JSON.parse(localStorage.getItem(statsKey(mode)) || "{}");
+  } catch {
+    return {};
+  }
+}
+
+function saveStats(mode, stats) {
+  localStorage.setItem(statsKey(mode), JSON.stringify(stats));
+}
+
+let stats = {}; // { [specimenId]: { seen: number, correct: number } }
+
 // Levenshtein distance (edit distance)
 function levenshtein(a, b) {
   a = normalize(a);
