@@ -1,3 +1,8 @@
+// =====================
+// Rock & Mineral Trainer
+// app.js
+// =====================
+
 // ---------- Utilities ----------
 function normalize(s) {
   return (s || "")
@@ -6,87 +11,6 @@ function normalize(s) {
     .replace(/[^a-z0-9\s-]/g, "")
     .replace(/\s+/g, " ");
 }
-
-const hintBtn = document.getElementById("hintBtn");
-const resetStatsBtn = document.getElementById("resetStatsBtn");
-const sessionStatsEl = document.getElementById("sessionStats");
-const perSpecimenStatsEl = document.getElementById("perSpecimenStats");
-
-function statsKey(mode) {
-  return `rmtrainer_stats_v1_${mode}`;
-}
-
-function loadStats(mode) {
-  try {
-    return JSON.parse(localStorage.getItem(statsKey(mode)) || "{}");
-  } catch {
-    return {};
-  }
-}
-function pct(correct, seen) {
-  if (!seen) return "—";
-  const p = (correct / seen) * 100;
-  return `${p.toFixed(0)}%`;
-}
-
-function renderStats() {
-  // Overall (this mode)
-  let totalSeen = 0, totalCorrect = 0;
-  for (const s of pool) {
-    const e = stats[s.id];
-    if (e) {
-      totalSeen += e.seen;
-      totalCorrect += e.correct;
-    }
-  }
-  sessionStatsEl.textContent = `Mode total: ${pct(totalCorrect, totalSeen)} (${totalCorrect}/${totalSeen})`;
-
-  // Per-specimen list for ONLY specimens in this mode
-  const rows = pool.map(s => {
-    const e = stats[s.id] || { seen: 0, correct: 0 };
-    return {
-      name: s.display,
-      id: s.id,
-      seen: e.seen,
-      correct: e.correct,
-      pct: e.seen ? (e.correct / e.seen) : null
-    };
-  });
-
-  // Sort: lowest accuracy first (so you can focus on weak ones),
-  // but keep never-seen at the top
-  rows.sort((a, b) => {
-    const aUnseen = a.seen === 0, bUnseen = b.seen === 0;
-    if (aUnseen && !bUnseen) return -1;
-    if (!aUnseen && bUnseen) return 1;
-    const ap = a.pct ?? 1;
-    const bp = b.pct ?? 1;
-    return ap - bp;
-  });
-
-  perSpecimenStatsEl.innerHTML = rows.map(r => `
-    <div class="statRow">
-      <div class="name">${r.name}</div>
-      <div class="pct">${pct(r.correct, r.seen)} <span style="opacity:.7">(${r.correct}/${r.seen})</span></div>
-    </div>
-  `).join("");
-}
-
-function hintFor(specimen) {
-  // First letter of each word in the display name
-  // "Orthoclase Feldspar" -> "O F"
-  return specimen.display
-    .trim()
-    .split(/\s+/)
-    .map(w => w[0]?.toUpperCase() || "")
-    .join(" ");
-}
-
-function saveStats(mode, stats) {
-  localStorage.setItem(statsKey(mode), JSON.stringify(stats));
-}
-
-let stats = {}; // { [specimenId]: { seen: number, correct: number } }
 
 // Levenshtein distance (edit distance)
 function levenshtein(a, b) {
@@ -100,8 +24,8 @@ function levenshtein(a, b) {
     for (let j = 1; j <= n; j++) {
       const cost = a[i - 1] === b[j - 1] ? 0 : 1;
       dp[i][j] = Math.min(
-        dp[i - 1][j] + 1,      // deletion
-        dp[i][j - 1] + 1,      // insertion
+        dp[i - 1][j] + 1,       // deletion
+        dp[i][j - 1] + 1,       // insertion
         dp[i - 1][j - 1] + cost // substitution
       );
     }
@@ -124,16 +48,52 @@ function choice(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+// ---------- Stats (per mode, saved in localStorage) ----------
+function statsKey(mode) {
+  return `rmtrainer_stats_v1_${mode}`;
+}
+
+function loadStats(mode) {
+  try {
+    return JSON.parse(localStorage.getItem(statsKey(mode)) || "{}");
+  } catch {
+    return {};
+  }
+}
+
+function saveStats(mode, statsObj) {
+  localStorage.setItem(statsKey(mode), JSON.stringify(statsObj));
+}
+
+function pct(correct, seen) {
+  if (!seen) return "—";
+  const p = (correct / seen) * 100;
+  return `${p.toFixed(0)}%`;
+}
+
+// ---------- Hint ----------
+function hintFor(specimen) {
+  // First letter of each word in the display name
+  // "Orthoclase Feldspar" -> "O F"
+  return specimen.display
+    .trim()
+    .split(/\s+/)
+    .map(w => w[0]?.toUpperCase() || "")
+    .join(" ");
+}
+
 // ---------- App State ----------
 let ALL = [];
 let MODE = "general";
-let pool = [];           // filtered specimens for mode
-let lastId = null;       // last specimen id shown (to avoid repeats)
-let current = null;      // current specimen object
-let currentImage = null; // current image path
+let pool = [];            // filtered specimens for mode
+let lastId = null;        // last specimen id shown (avoid repeats)
+let current = null;       // current specimen object
+let currentImage = null;  // current image path
 let revealed = false;
 
-// Even weighting rule:
+let stats = {}; // { [specimenId]: { seen: number, correct: number } }
+
+// Even weighting:
 // - pick specimen TYPES evenly (each type has equal chance)
 // - once type chosen, pick random image within that type
 function pickNextSpecimen() {
@@ -141,12 +101,12 @@ function pickNextSpecimen() {
 
   // Avoid same type as last time
   const candidates = pool.filter(s => s.id !== lastId);
-  const list = candidates.length ? candidates : pool; // fallback if only 1 item exists
+  const list = candidates.length ? candidates : pool; // fallback if only 1 exists
 
   // Even probability across types
   const next = choice(list);
 
-  // Image: random within chosen type
+  // Random image within chosen type
   const img = choice(next.images);
 
   lastId = next.id;
@@ -172,12 +132,16 @@ function setupZoomPan(viewerEl, imgEl) {
     return Math.min(6, Math.max(1, s));
   }
 
-  viewerEl.addEventListener("wheel", (e) => {
-    e.preventDefault();
-    const delta = -Math.sign(e.deltaY) * 0.15;
-    scale = clampScale(scale + delta);
-    apply();
-  }, { passive: false });
+  viewerEl.addEventListener(
+    "wheel",
+    (e) => {
+      e.preventDefault();
+      const delta = -Math.sign(e.deltaY) * 0.15;
+      scale = clampScale(scale + delta);
+      apply();
+    },
+    { passive: false }
+  );
 
   viewerEl.addEventListener("pointerdown", (e) => {
     dragging = true;
@@ -197,17 +161,27 @@ function setupZoomPan(viewerEl, imgEl) {
     apply();
   });
 
-  viewerEl.addEventListener("pointerup", () => { dragging = false; });
-  viewerEl.addEventListener("pointercancel", () => { dragging = false; });
-
-  // Reset on double click / double tap
-  viewerEl.addEventListener("dblclick", () => {
-    scale = 1; tx = 0; ty = 0; apply();
+  viewerEl.addEventListener("pointerup", () => {
+    dragging = false;
+  });
+  viewerEl.addEventListener("pointercancel", () => {
+    dragging = false;
   });
 
-  // Expose reset when image changes
+  // Reset on double click
+  viewerEl.addEventListener("dblclick", () => {
+    scale = 1;
+    tx = 0;
+    ty = 0;
+    apply();
+  });
+
+  // Expose reset function when image changes
   return function reset() {
-    scale = 1; tx = 0; ty = 0; apply();
+    scale = 1;
+    tx = 0;
+    ty = 0;
+    apply();
   };
 }
 
@@ -230,10 +204,8 @@ function checkAnswer(userText, specimen) {
     }
   }
 
-  // Tune this threshold:
-  // 0.86 is fairly strict for short names; for longer names it still works.
+  // Tune this threshold if needed
   const ok = bestScore >= 0.86;
-
   return { ok, best, score: bestScore };
 }
 
@@ -246,6 +218,12 @@ const submitBtn = document.getElementById("submitBtn");
 const nextBtn = document.getElementById("nextBtn");
 const feedbackEl = document.getElementById("feedback");
 
+// Optional elements (safe if missing)
+const hintBtn = document.getElementById("hintBtn");
+const resetStatsBtn = document.getElementById("resetStatsBtn");
+const sessionStatsEl = document.getElementById("sessionStats");
+const perSpecimenStatsEl = document.getElementById("perSpecimenStats");
+
 let resetZoom = () => {};
 
 function setFeedback(html, kind) {
@@ -254,20 +232,71 @@ function setFeedback(html, kind) {
   feedbackEl.innerHTML = html;
 }
 
+function renderStats() {
+  if (!sessionStatsEl || !perSpecimenStatsEl) return;
+
+  // Overall (this mode)
+  let totalSeen = 0,
+    totalCorrect = 0;
+
+  for (const s of pool) {
+    const e = stats[s.id];
+    if (e) {
+      totalSeen += e.seen;
+      totalCorrect += e.correct;
+    }
+  }
+  sessionStatsEl.textContent = `Mode total: ${pct(totalCorrect, totalSeen)} (${totalCorrect}/${totalSeen})`;
+
+  // Per-specimen list for ONLY specimens in this mode
+  const rows = pool.map((s) => {
+    const e = stats[s.id] || { seen: 0, correct: 0 };
+    return {
+      name: s.display,
+      id: s.id,
+      seen: e.seen,
+      correct: e.correct,
+      acc: e.seen ? e.correct / e.seen : null,
+    };
+  });
+
+  // Sort: never-seen first, then lowest accuracy first
+  rows.sort((a, b) => {
+    const aUnseen = a.seen === 0,
+      bUnseen = b.seen === 0;
+    if (aUnseen && !bUnseen) return -1;
+    if (!aUnseen && bUnseen) return 1;
+    const ap = a.acc ?? 1;
+    const bp = b.acc ?? 1;
+    return ap - bp;
+  });
+
+  perSpecimenStatsEl.innerHTML = rows
+    .map(
+      (r) => `
+      <div class="statRow">
+        <div class="name">${r.name}</div>
+        <div class="pct">${pct(r.correct, r.seen)} <span style="opacity:.7">(${r.correct}/${r.seen})</span></div>
+      </div>
+    `
+    )
+    .join("");
+}
+
 function setMode(mode) {
   MODE = mode;
-  pool = ALL.filter(s => (s.modes || []).includes(MODE));
+  pool = ALL.filter((s) => (s.modes || []).includes(MODE));
   lastId = null;
 
-  stats = loadStats(MODE); // <-- load per-mode stats
+  stats = loadStats(MODE);
   renderStats();
 
   next();
 }
 
-
 function renderCurrent() {
   if (!current) return;
+
   imgEl.src = currentImage;
   imgEl.alt = `Specimen image (${current.display})`;
   resetZoom();
@@ -289,7 +318,7 @@ function ensureStatEntry(id) {
 function revealResult(result) {
   const correctName = current.display;
 
-  // Update stats
+  // Update stats (count attempts when user clicks "Check")
   ensureStatEntry(current.id);
   stats[current.id].seen += 1;
   if (result.ok) stats[current.id].correct += 1;
@@ -303,7 +332,6 @@ function revealResult(result) {
   }
   revealed = true;
 }
-
 
 // Optional behavior: pressing "Check" again after revealing moves to next
 function handleSubmit() {
@@ -326,43 +354,46 @@ async function init() {
 
   // Build mode list from data
   const modes = new Set();
-  for (const s of ALL) for (const m of (s.modes || [])) modes.add(m);
+  for (const s of ALL) for (const m of s.modes || []) modes.add(m);
 
   // Populate dropdown
   const sorted = Array.from(modes).sort();
-  modeSelect.innerHTML = sorted.map(m => `<option value="${m}">${m}</option>`).join("");
+  modeSelect.innerHTML = sorted.map((m) => `<option value="${m}">${m}</option>`).join("");
 
-  // Default mode preference
-  MODE = sorted.includes("general") ? "general" : (sorted[0] || "general");
+  // Default mode
+  MODE = sorted.includes("general") ? "general" : sorted[0] || "general";
   modeSelect.value = MODE;
 
   // Setup zoom/pan
   resetZoom = setupZoomPan(viewerEl, imgEl);
-  
+
   // Wire events
   modeSelect.addEventListener("change", () => setMode(modeSelect.value));
   submitBtn.addEventListener("click", handleSubmit);
   nextBtn.addEventListener("click", next);
+
   answerInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") handleSubmit();
   });
 
-  setMode(MODE);
-  hintBtn.addEventListener("click", () => {
-  if (!current) return;
-  const hint = hintFor(current);
-  setFeedback(`💡 Hint: <b>${hint}</b>`, null);
-  });
-  resetStatsBtn.addEventListener("click", () => {
-  localStorage.removeItem(statsKey(MODE));
-  stats = {};
-  renderStats();
-  setFeedback("Stats reset for this mode.", null);
+  hintBtn?.addEventListener("click", () => {
+    if (!current) return;
+    const hint = hintFor(current);
+    setFeedback(`💡 Hint: <b>${hint}</b>`, null);
   });
 
+  resetStatsBtn?.addEventListener("click", () => {
+    localStorage.removeItem(statsKey(MODE));
+    stats = {};
+    renderStats();
+    setFeedback("Stats reset for this mode.", null);
+  });
+
+  // Start
+  setMode(MODE);
 }
 
-init().catch(err => {
+init().catch((err) => {
   console.error(err);
   setFeedback("Failed to load specimen data. Check console + paths.", "bad");
 });
