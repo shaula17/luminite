@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rock & Mineral ID Trainer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <h1>Rock & Mineral ID Trainer</h1>
+
+      <div class="controls">
+        <label>
+          Mode:
+          <select id="modeSelect"></select>
+        </label>
+
+        <button id="nextBtn" type="button">Next</button>
+      </div>
+    </header>
+
+    <section class="card">
+      <div class="viewer" id="viewer">
+        <img id="specimenImg" alt="Specimen" draggable="false" />
+      </div>
+
+      <div class="qa">
+        <label class="prompt" for="answerInput">Type your ID:</label>
+        <div class="row">
+          <input id="answerInput" type="text" placeholder="e.g., quartz" autocomplete="off" />
+          <button id="submitBtn" type="button">Check</button>
+        </div>
+
+        <div id="feedback" class="feedback"></div>
+
+        <details class="help">
+          <summary>Tips</summary>
+          <ul>
+            <li>Scroll/wheel to zoom. Drag to pan.</li>
+            <li>Spelling tolerance is on (fuzzy matching).</li>
+          </ul>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
