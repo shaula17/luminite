@@ -23,6 +23,54 @@ function loadStats(mode) {
     return {};
   }
 }
+function pct(correct, seen) {
+  if (!seen) return "—";
+  const p = (correct / seen) * 100;
+  return `${p.toFixed(0)}%`;
+}
+
+function renderStats() {
+  // Overall (this mode)
+  let totalSeen = 0, totalCorrect = 0;
+  for (const s of pool) {
+    const e = stats[s.id];
+    if (e) {
+      totalSeen += e.seen;
+      totalCorrect += e.correct;
+    }
+  }
+  sessionStatsEl.textContent = `Mode total: ${pct(totalCorrect, totalSeen)} (${totalCorrect}/${totalSeen})`;
+
+  // Per-specimen list for ONLY specimens in this mode
+  const rows = pool.map(s => {
+    const e = stats[s.id] || { seen: 0, correct: 0 };
+    return {
+      name: s.display,
+      id: s.id,
+      seen: e.seen,
+      correct: e.correct,
+      pct: e.seen ? (e.correct / e.seen) : null
+    };
+  });
+
+  // Sort: lowest accuracy first (so you can focus on weak ones),
+  // but keep never-seen at the top
+  rows.sort((a, b) => {
+    const aUnseen = a.seen === 0, bUnseen = b.seen === 0;
+    if (aUnseen && !bUnseen) return -1;
+    if (!aUnseen && bUnseen) return 1;
+    const ap = a.pct ?? 1;
+    const bp = b.pct ?? 1;
+    return ap - bp;
+  });
+
+  perSpecimenStatsEl.innerHTML = rows.map(r => `
+    <div class="statRow">
+      <div class="name">${r.name}</div>
+      <div class="pct">${pct(r.correct, r.seen)} <span style="opacity:.7">(${r.correct}/${r.seen})</span></div>
+    </div>
+  `).join("");
+}
 
 function hintFor(specimen) {
   // First letter of each word in the display name
@@ -304,6 +352,12 @@ async function init() {
   if (!current) return;
   const hint = hintFor(current);
   setFeedback(`💡 Hint: <b>${hint}</b>`, null);
+  });
+  resetStatsBtn.addEventListener("click", () => {
+  localStorage.removeItem(statsKey(MODE));
+  stats = {};
+  renderStats();
+  setFeedback("Stats reset for this mode.", null);
   });
 
 }
