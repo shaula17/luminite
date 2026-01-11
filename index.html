@@ -30,8 +30,20 @@
         <label class="prompt" for="answerInput">Type your ID:</label>
         <div class="row">
           <input id="answerInput" type="text" placeholder="e.g., quartz" autocomplete="off" />
+          <button id="hintBtn" type="button">Hint</button>
           <button id="submitBtn" type="button">Check</button>
         </div>
+        
+        <div class="row" style="margin-top:10px; align-items:center; justify-content:space-between;">
+          <div id="sessionStats" class="mini"></div>
+          <button id="resetStatsBtn" type="button">Reset stats</button>
+        </div>
+        
+        <div class="statsBox">
+          <h3>Accuracy (this mode)</h3>
+          <div id="perSpecimenStats" class="statsList"></div>
+        </div>
+
 
         <div id="feedback" class="feedback"></div>
 
