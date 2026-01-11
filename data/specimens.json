@@ -1,0 +1,23 @@
+{
+  "specimens": [
+    {
+      "id": "quartz",
+      "display": "Quartz",
+      "aliases": ["quartz", "rock crystal"],
+      "modes": ["general", "minerals", "igneous"],
+      "images": [
+        "images/quartz/q1.jpg",
+        "images/quartz/q2.jpg"
+      ]
+    },
+    {
+      "id": "orthoclase_feldspar",
+      "display": "Orthoclase Feldspar",
+      "aliases": ["orthoclase", "feldspar", "k-feldspar", "potassium feldspar"],
+      "modes": ["general", "minerals"],
+      "images": [
+        "images/feldspar_orthoclase/o1.jpg"
+      ]
+    }
+  ]
+}
