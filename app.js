@@ -24,6 +24,16 @@ function loadStats(mode) {
   }
 }
 
+function hintFor(specimen) {
+  // First letter of each word in the display name
+  // "Orthoclase Feldspar" -> "O F"
+  return specimen.display
+    .trim()
+    .split(/\s+/)
+    .map(w => w[0]?.toUpperCase() || "")
+    .join(" ");
+}
+
 function saveStats(mode, stats) {
   localStorage.setItem(statsKey(mode), JSON.stringify(stats));
 }
@@ -224,16 +234,28 @@ function next() {
   renderCurrent();
 }
 
+function ensureStatEntry(id) {
+  if (!stats[id]) stats[id] = { seen: 0, correct: 0 };
+}
+
 function revealResult(result) {
   const correctName = current.display;
+
+  // Update stats
+  ensureStatEntry(current.id);
+  stats[current.id].seen += 1;
+  if (result.ok) stats[current.id].correct += 1;
+  saveStats(MODE, stats);
+  renderStats();
+
   if (result.ok) {
     setFeedback(`✅ <b>Correct!</b> (${correctName})`, "ok");
   } else {
-    // “If it's wrong, it'll display the right mineral.”
     setFeedback(`❌ Not quite. Correct answer: <b>${correctName}</b>`, "bad");
   }
   revealed = true;
 }
+
 
 // Optional behavior: pressing "Check" again after revealing moves to next
 function handleSubmit() {
@@ -268,7 +290,7 @@ async function init() {
 
   // Setup zoom/pan
   resetZoom = setupZoomPan(viewerEl, imgEl);
-
+  
   // Wire events
   modeSelect.addEventListener("change", () => setMode(modeSelect.value));
   submitBtn.addEventListener("click", handleSubmit);
@@ -278,6 +300,12 @@ async function init() {
   });
 
   setMode(MODE);
+  hintBtn.addEventListener("click", () => {
+  if (!current) return;
+  const hint = hintFor(current);
+  setFeedback(`💡 Hint: <b>${hint}</b>`, null);
+  });
+
 }
 
 init().catch(err => {
