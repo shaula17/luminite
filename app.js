@@ -199,9 +199,14 @@ function setFeedback(html, kind) {
 function setMode(mode) {
   MODE = mode;
   pool = ALL.filter(s => (s.modes || []).includes(MODE));
-  lastId = null; // reset "no repeat" when switching modes
+  lastId = null;
+
+  stats = loadStats(MODE); // <-- load per-mode stats
+  renderStats();
+
   next();
 }
+
 
 function renderCurrent() {
   if (!current) return;
