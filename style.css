@@ -28,6 +28,19 @@ button:hover { filter: brightness(1.1); }
   max-width: none;
   will-change: transform;
 }
+.viewerControls {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  gap: 8px;
+}
+.viewerControls button {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(17, 24, 35, 0.9);
+  border: 1px solid #2a3542;
+}
 
 .qa {
   background: #0f1621; border: 1px solid #223042; border-radius: 16px;
@@ -52,3 +65,54 @@ button:hover { filter: brightness(1.1); }
 }
 .statRow .name { opacity: 0.95; }
 .statRow .pct { font-variant-numeric: tabular-nums; opacity: 0.95; }
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(5, 8, 12, 0.6);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 20;
+}
+.modal.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+.modalCard {
+  width: min(420px, 92vw);
+  background: #0f1621;
+  border: 1px solid #223042;
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
+}
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.modalHeader h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.modalHeader button {
+  padding: 6px 10px;
+  border-radius: 10px;
+}
+.modalBody {
+  display: grid;
+  gap: 6px;
+}
+.formulaName {
+  font-weight: 600;
+}
+.formulaText {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.95;
+}

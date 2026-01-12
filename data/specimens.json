@@ -1,22 +1,1706 @@
 {
   "specimens": [
     {
-      "id": "quartz",
-      "display": "Quartz",
-      "aliases": ["quartz", "rock crystal"],
-      "modes": ["general", "minerals", "igneous"],
+      "id": "barite",
+      "display": "Barite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Sulfates"
+      ],
       "images": [
-        "images/quartz/q1.jpg",
-        "images/quartz/q2.jpg"
+        "images/barite/1.jpg"
       ]
     },
     {
-      "id": "orthoclase_feldspar",
-      "display": "Orthoclase Feldspar",
-      "aliases": ["orthoclase", "feldspar", "k-feldspar", "potassium feldspar"],
-      "modes": ["general", "minerals"],
+      "id": "celestite",
+      "display": "Celestite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Sulfates"
+      ],
       "images": [
-        "images/feldspar_orthoclase/o1.jpg"
+        "images/celestite/1.jpg"
+      ]
+    },
+    {
+      "id": "alabaster",
+      "display": "Alabaster",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Sulfates"
+      ],
+      "images": [
+        "images/alabaster/1.jpg"
+      ]
+    },
+    {
+      "id": "satin_spar",
+      "display": "Satin Spar",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Sulfates"
+      ],
+      "images": [
+        "images/satin_spar/1.jpg"
+      ]
+    },
+    {
+      "id": "selenite",
+      "display": "Selenite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Sulfates"
+      ],
+      "images": [
+        "images/selenite/1.jpg"
+      ]
+    },
+    {
+      "id": "bornite",
+      "display": "Bornite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Sulfides"
+      ],
+      "images": [
+        "images/bornite/1.jpg"
+      ]
+    },
+    {
+      "id": "chalcopyrite",
+      "display": "Chalcopyrite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Sulfides"
+      ],
+      "images": [
+        "images/chalcopyrite/1.jpg"
+      ]
+    },
+    {
+      "id": "galena",
+      "display": "Galena",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Sulfides"
+      ],
+      "images": [
+        "images/galena/1.jpg"
+      ]
+    },
+    {
+      "id": "pyrite",
+      "display": "Pyrite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Sulfides"
+      ],
+      "images": [
+        "images/pyrite/1.jpg"
+      ]
+    },
+    {
+      "id": "sphalerite",
+      "display": "Sphalerite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Sulfides"
+      ],
+      "images": [
+        "images/sphalerite/1.jpg"
+      ]
+    },
+    {
+      "id": "stibnite",
+      "display": "Stibnite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Sulfides"
+      ],
+      "images": [
+        "images/stibnite/1.jpg"
+      ]
+    },
+    {
+      "id": "ulexite",
+      "display": "Ulexite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Borates"
+      ],
+      "images": [
+        "images/ulexite/1.jpg"
+      ]
+    },
+    {
+      "id": "aragonite",
+      "display": "Aragonite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Carbonates"
+      ],
+      "images": [
+        "images/aragonite/1.jpg"
+      ]
+    },
+    {
+      "id": "azurite",
+      "display": "Azurite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Carbonates"
+      ],
+      "images": [
+        "images/azurite/1.jpg"
+      ]
+    },
+    {
+      "id": "calcite",
+      "display": "Calcite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Carbonates"
+      ],
+      "images": [
+        "images/calcite/1.jpg"
+      ]
+    },
+    {
+      "id": "dolomite",
+      "display": "Dolomite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Carbonates"
+      ],
+      "images": [
+        "images/dolomite/1.jpg"
+      ]
+    },
+    {
+      "id": "malachite",
+      "display": "Malachite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Carbonates"
+      ],
+      "images": [
+        "images/malachite/1.jpg"
+      ]
+    },
+    {
+      "id": "magnesite",
+      "display": "Magnesite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Carbonates"
+      ],
+      "images": [
+        "images/magnesite/1.jpg"
+      ]
+    },
+    {
+      "id": "rhodochrosite",
+      "display": "Rhodochrosite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Carbonates"
+      ],
+      "images": [
+        "images/rhodochrosite/1.jpg"
+      ]
+    },
+    {
+      "id": "siderite",
+      "display": "Siderite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Carbonates"
+      ],
+      "images": [
+        "images/siderite/1.jpg"
+      ]
+    },
+    {
+      "id": "copper",
+      "display": "Copper",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Native Elements"
+      ],
+      "images": [
+        "images/copper/1.jpg"
+      ]
+    },
+    {
+      "id": "diamond",
+      "display": "Diamond",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Native Elements"
+      ],
+      "images": [
+        "images/diamond/1.jpg"
+      ]
+    },
+    {
+      "id": "gold",
+      "display": "Gold",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Native Elements"
+      ],
+      "images": [
+        "images/gold/1.jpg"
+      ]
+    },
+    {
+      "id": "graphite",
+      "display": "Graphite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Native Elements"
+      ],
+      "images": [
+        "images/graphite/1.jpg"
+      ]
+    },
+    {
+      "id": "silver",
+      "display": "Silver",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Native Elements"
+      ],
+      "images": [
+        "images/silver/1.jpg"
+      ]
+    },
+    {
+      "id": "sulfur",
+      "display": "Sulfur",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Native Elements"
+      ],
+      "images": [
+        "images/sulfur/1.jpg"
+      ]
+    },
+    {
+      "id": "fluorite",
+      "display": "Fluorite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Halides"
+      ],
+      "images": [
+        "images/fluorite/1.jpg"
+      ]
+    },
+    {
+      "id": "halite",
+      "display": "Halite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Halides"
+      ],
+      "images": [
+        "images/halite/1.jpg"
+      ]
+    },
+    {
+      "id": "corundum",
+      "display": "Corundum",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Oxides/Hydroxides"
+      ],
+      "images": [
+        "images/corundum/1.jpg"
+      ]
+    },
+    {
+      "id": "goethite",
+      "display": "Goethite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Oxides/Hydroxides"
+      ],
+      "images": [
+        "images/goethite/1.jpg"
+      ]
+    },
+    {
+      "id": "limonite",
+      "display": "Limonite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Oxides/Hydroxides"
+      ],
+      "images": [
+        "images/limonite/1.jpg"
+      ]
+    },
+    {
+      "id": "hematite",
+      "display": "Hematite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Oxides/Hydroxides"
+      ],
+      "images": [
+        "images/hematite/1.jpg"
+      ]
+    },
+    {
+      "id": "magnetite",
+      "display": "Magnetite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Oxides/Hydroxides"
+      ],
+      "images": [
+        "images/magnetite/1.jpg"
+      ]
+    },
+    {
+      "id": "pyrolusite",
+      "display": "Pyrolusite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Oxides/Hydroxides"
+      ],
+      "images": [
+        "images/pyrolusite/1.jpg"
+      ]
+    },
+    {
+      "id": "rutile",
+      "display": "Rutile",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Oxides/Hydroxides"
+      ],
+      "images": [
+        "images/rutile/1.jpg"
+      ]
+    },
+    {
+      "id": "zincite",
+      "display": "Zincite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Oxides/Hydroxides"
+      ],
+      "images": [
+        "images/zincite/1.jpg"
+      ]
+    },
+    {
+      "id": "turquoise",
+      "display": "Turquoise",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Phosphates"
+      ],
+      "images": [
+        "images/turquoise/1.jpg"
+      ]
+    },
+    {
+      "id": "fluorapatite",
+      "display": "Fluorapatite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Phosphates"
+      ],
+      "images": [
+        "images/fluorapatite/1.jpg"
+      ]
+    },
+    {
+      "id": "pyromorphite",
+      "display": "Pyromorphite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Phosphates"
+      ],
+      "images": [
+        "images/pyromorphite/1.jpg"
+      ]
+    },
+    {
+      "id": "vanadinite",
+      "display": "Vanadinite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Phosphates"
+      ],
+      "images": [
+        "images/vanadinite/1.jpg"
+      ]
+    },
+    {
+      "id": "actinolite",
+      "display": "Actinolite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/actinolite/1.jpg"
+      ]
+    },
+    {
+      "id": "albite",
+      "display": "Albite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/albite/1.jpg"
+      ]
+    },
+    {
+      "id": "almandine",
+      "display": "Almandine",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/almandine/1.jpg"
+      ]
+    },
+    {
+      "id": "amazonite",
+      "display": "Amazonite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/amazonite/1.jpg"
+      ]
+    },
+    {
+      "id": "amphibole",
+      "display": "Amphibole",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/amphibole/1.jpg"
+      ]
+    },
+    {
+      "id": "apophyllite",
+      "display": "Apophyllite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/apophyllite/1.jpg"
+      ]
+    },
+    {
+      "id": "augite",
+      "display": "Augite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/augite/1.jpg"
+      ]
+    },
+    {
+      "id": "aventurine",
+      "display": "Aventurine",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/aventurine/1.jpg"
+      ]
+    },
+    {
+      "id": "beryl",
+      "display": "Beryl",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/beryl/1.jpg"
+      ]
+    },
+    {
+      "id": "biotite",
+      "display": "Biotite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/biotite/1.jpg"
+      ]
+    },
+    {
+      "id": "chalcedony",
+      "display": "Chalcedony",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/chalcedony/1.jpg"
+      ]
+    },
+    {
+      "id": "chrysocolla",
+      "display": "Chrysocolla",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/chrysocolla/1.jpg"
+      ]
+    },
+    {
+      "id": "dioptase",
+      "display": "Dioptase",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/dioptase/1.jpg"
+      ]
+    },
+    {
+      "id": "epidote",
+      "display": "Epidote",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/epidote/1.jpg"
+      ]
+    },
+    {
+      "id": "grossular",
+      "display": "Grossular (green)",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/grossular/1.jpg"
+      ]
+    },
+    {
+      "id": "hornblende",
+      "display": "Hornblende",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/hornblende/1.jpg"
+      ]
+    },
+    {
+      "id": "jasper",
+      "display": "Jasper",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/jasper/1.jpg"
+      ]
+    },
+    {
+      "id": "kaolinite",
+      "display": "Kaolinite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/kaolinite/1.jpg"
+      ]
+    },
+    {
+      "id": "kyanite",
+      "display": "Kyanite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/kyanite/1.jpg"
+      ]
+    },
+    {
+      "id": "labradorite",
+      "display": "Labradorite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/labradorite/1.jpg"
+      ]
+    },
+    {
+      "id": "lepidolite",
+      "display": "Lepidolite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/lepidolite/1.jpg"
+      ]
+    },
+    {
+      "id": "milky_quartz",
+      "display": "Milky Quartz",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/milky_quartz/1.jpg"
+      ]
+    },
+    {
+      "id": "microcline",
+      "display": "Microcline",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/microcline/1.jpg"
+      ]
+    },
+    {
+      "id": "muscovite",
+      "display": "Muscovite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/muscovite/1.jpg"
+      ]
+    },
+    {
+      "id": "olivine",
+      "display": "Olivine",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/olivine/1.jpg"
+      ]
+    },
+    {
+      "id": "opal",
+      "display": "Opal",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/opal/1.jpg"
+      ]
+    },
+    {
+      "id": "orthoclase",
+      "display": "Orthoclase",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/orthoclase/1.jpg"
+      ]
+    },
+    {
+      "id": "prehnite",
+      "display": "Prehnite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/prehnite/1.jpg"
+      ]
+    },
+    {
+      "id": "rock_crystal",
+      "display": "Quartz Crystal (Rock Crystal)",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/rock_crystal/1.jpg"
+      ]
+    },
+    {
+      "id": "rhodonite",
+      "display": "Rhodonite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/rhodonite/1.jpg"
+      ]
+    },
+    {
+      "id": "rose_quartz",
+      "display": "Rose Quartz",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/rose_quartz/1.jpg"
+      ]
+    },
+    {
+      "id": "smoky_quartz",
+      "display": "Smoky Quartz",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/smoky_quartz/1.jpg"
+      ]
+    },
+    {
+      "id": "sodalite",
+      "display": "Sodalite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/sodalite/1.jpg"
+      ]
+    },
+    {
+      "id": "spodumene",
+      "display": "Spodumene",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/spodumene/1.jpg"
+      ]
+    },
+    {
+      "id": "staurolite",
+      "display": "Staurolite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/staurolite/1.jpg"
+      ]
+    },
+    {
+      "id": "stilbite",
+      "display": "Stilbite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/stilbite/1.jpg"
+      ]
+    },
+    {
+      "id": "talc",
+      "display": "Talc",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/talc/1.jpg"
+      ]
+    },
+    {
+      "id": "tiger_s_eye",
+      "display": "Tiger’s Eye",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/tiger_s_eye/1.jpg"
+      ]
+    },
+    {
+      "id": "topaz",
+      "display": "Topaz",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/topaz/1.jpg"
+      ]
+    },
+    {
+      "id": "tourmaline",
+      "display": "Tourmaline",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/tourmaline/1.jpg"
+      ]
+    },
+    {
+      "id": "tremolite",
+      "display": "Tremolite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/tremolite/1.jpg"
+      ]
+    },
+    {
+      "id": "willemite",
+      "display": "Willemite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/willemite/1.jpg"
+      ]
+    },
+    {
+      "id": "wollastonite",
+      "display": "Wollastonite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/wollastonite/1.jpg"
+      ]
+    },
+    {
+      "id": "zircon",
+      "display": "Zircon",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+        "images/zircon/1.jpg"
+      ]
+    },
+    {
+      "id": "banded_iron_formation",
+      "display": "Banded Iron Formation",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Sedimentary"
+      ],
+      "images": [
+        "images/banded_iron_formation/1.jpg"
+      ]
+    },
+    {
+      "id": "bauxite",
+      "display": "Bauxite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Sedimentary"
+      ],
+      "images": [
+        "images/bauxite/1.jpg"
+      ]
+    },
+    {
+      "id": "breccia",
+      "display": "Breccia",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Sedimentary"
+      ],
+      "images": [
+        "images/breccia/1.jpg"
+      ]
+    },
+    {
+      "id": "chert",
+      "display": "Chert",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Sedimentary"
+      ],
+      "images": [
+        "images/chert/1.jpg"
+      ]
+    },
+    {
+      "id": "flint",
+      "display": "Flint",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Sedimentary"
+      ],
+      "images": [
+        "images/flint/1.jpg"
+      ]
+    },
+    {
+      "id": "coal_anthracite",
+      "display": "Coal – Anthracite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Sedimentary"
+      ],
+      "images": [
+        "images/coal_anthracite/1.jpg"
+      ]
+    },
+    {
+      "id": "coal_bituminous",
+      "display": "Coal – Bituminous",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Sedimentary"
+      ],
+      "images": [
+        "images/coal_bituminous/1.jpg"
+      ]
+    },
+    {
+      "id": "coal_lignite",
+      "display": "Coal – Lignite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Sedimentary"
+      ],
+      "images": [
+        "images/coal_lignite/1.jpg"
+      ]
+    },
+    {
+      "id": "conglomerate",
+      "display": "Conglomerate",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Sedimentary"
+      ],
+      "images": [
+        "images/conglomerate/1.jpg"
+      ]
+    },
+    {
+      "id": "diatomite",
+      "display": "Diatomite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Sedimentary"
+      ],
+      "images": [
+        "images/diatomite/1.jpg"
+      ]
+    },
+    {
+      "id": "dolostone",
+      "display": "Dolostone",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Sedimentary"
+      ],
+      "images": [
+        "images/dolostone/1.jpg"
+      ]
+    },
+    {
+      "id": "limestone_chalk",
+      "display": "Limestone – Chalk",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Sedimentary"
+      ],
+      "images": [
+        "images/limestone_chalk/1.jpg"
+      ]
+    },
+    {
+      "id": "limestone_coquina",
+      "display": "Limestone – Coquina",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Sedimentary"
+      ],
+      "images": [
+        "images/limestone_coquina/1.jpg"
+      ]
+    },
+    {
+      "id": "limestone_fossil_limestone",
+      "display": "Limestone – Fossil Limestone",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Sedimentary"
+      ],
+      "images": [
+        "images/limestone_fossil_limestone/1.jpg"
+      ]
+    },
+    {
+      "id": "limestone_oolitic_limestone",
+      "display": "Limestone – Oolitic Limestone",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Sedimentary"
+      ],
+      "images": [
+        "images/limestone_oolitic_limestone/1.jpg"
+      ]
+    },
+    {
+      "id": "limestone_travertine",
+      "display": "Limestone – Travertine",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Sedimentary"
+      ],
+      "images": [
+        "images/limestone_travertine/1.jpg"
+      ]
+    },
+    {
+      "id": "rock_gypsum",
+      "display": "Rock Gypsum",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Sedimentary"
+      ],
+      "images": [
+        "images/rock_gypsum/1.jpg"
+      ]
+    },
+    {
+      "id": "rock_salt",
+      "display": "Rock Salt",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Sedimentary"
+      ],
+      "images": [
+        "images/rock_salt/1.jpg"
+      ]
+    },
+    {
+      "id": "sandstone_arkose",
+      "display": "Sandstone – Arkose",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Sedimentary"
+      ],
+      "images": [
+        "images/sandstone_arkose/1.jpg"
+      ]
+    },
+    {
+      "id": "sandstone_greywacke",
+      "display": "Sandstone – Greywacke",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Sedimentary"
+      ],
+      "images": [
+        "images/sandstone_greywacke/1.jpg"
+      ]
+    },
+    {
+      "id": "sandstone_quartz_sandstone",
+      "display": "Sandstone – Quartz Sandstone",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Sedimentary"
+      ],
+      "images": [
+        "images/sandstone_quartz_sandstone/1.jpg"
+      ]
+    },
+    {
+      "id": "shale",
+      "display": "Shale",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Sedimentary"
+      ],
+      "images": [
+        "images/shale/1.jpg"
+      ]
+    },
+    {
+      "id": "siltstone",
+      "display": "Siltstone",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Sedimentary"
+      ],
+      "images": [
+        "images/siltstone/1.jpg"
+      ]
+    },
+    {
+      "id": "andesite",
+      "display": "Andesite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Igneous"
+      ],
+      "images": [
+        "images/andesite/1.jpg"
+      ]
+    },
+    {
+      "id": "basalt",
+      "display": "Basalt",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Igneous"
+      ],
+      "images": [
+        "images/basalt/1.jpg"
+      ]
+    },
+    {
+      "id": "diorite",
+      "display": "Diorite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Igneous"
+      ],
+      "images": [
+        "images/diorite/1.jpg"
+      ]
+    },
+    {
+      "id": "gabbro",
+      "display": "Gabbro",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Igneous"
+      ],
+      "images": [
+        "images/gabbro/1.jpg"
+      ]
+    },
+    {
+      "id": "granite",
+      "display": "Granite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Igneous"
+      ],
+      "images": [
+        "images/granite/1.jpg"
+      ]
+    },
+    {
+      "id": "obsidian",
+      "display": "Obsidian",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Igneous"
+      ],
+      "images": [
+        "images/obsidian/1.jpg"
+      ]
+    },
+    {
+      "id": "pegmatite",
+      "display": "Pegmatite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Igneous"
+      ],
+      "images": [
+        "images/pegmatite/1.jpg"
+      ]
+    },
+    {
+      "id": "peridotite",
+      "display": "Peridotite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Igneous"
+      ],
+      "images": [
+        "images/peridotite/1.jpg"
+      ]
+    },
+    {
+      "id": "pumice",
+      "display": "Pumice",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Igneous"
+      ],
+      "images": [
+        "images/pumice/1.jpg"
+      ]
+    },
+    {
+      "id": "rhyolite",
+      "display": "Rhyolite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Igneous"
+      ],
+      "images": [
+        "images/rhyolite/1.jpg"
+      ]
+    },
+    {
+      "id": "scoria",
+      "display": "Scoria",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Igneous"
+      ],
+      "images": [
+        "images/scoria/1.jpg"
+      ]
+    },
+    {
+      "id": "syenite",
+      "display": "Syenite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Igneous"
+      ],
+      "images": [
+        "images/syenite/1.jpg"
+      ]
+    },
+    {
+      "id": "tuff",
+      "display": "Tuff",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Igneous"
+      ],
+      "images": [
+        "images/tuff/1.jpg"
+      ]
+    },
+    {
+      "id": "tuff_breccia",
+      "display": "Tuff Breccia",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Igneous"
+      ],
+      "images": [
+        "images/tuff_breccia/1.jpg"
+      ]
+    },
+    {
+      "id": "amphibolite",
+      "display": "Amphibolite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Metamorphic"
+      ],
+      "images": [
+        "images/amphibolite/1.jpg"
+      ]
+    },
+    {
+      "id": "garnet_schist",
+      "display": "Garnet Schist",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Metamorphic"
+      ],
+      "images": [
+        "images/garnet_schist/1.jpg"
+      ]
+    },
+    {
+      "id": "gneiss",
+      "display": "Gneiss",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Metamorphic"
+      ],
+      "images": [
+        "images/gneiss/1.jpg"
+      ]
+    },
+    {
+      "id": "marble",
+      "display": "Marble",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Metamorphic"
+      ],
+      "images": [
+        "images/marble/1.jpg"
+      ]
+    },
+    {
+      "id": "mica_schist",
+      "display": "Mica Schist",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Metamorphic"
+      ],
+      "images": [
+        "images/mica_schist/1.jpg"
+      ]
+    },
+    {
+      "id": "phyllite",
+      "display": "Phyllite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Metamorphic"
+      ],
+      "images": [
+        "images/phyllite/1.jpg"
+      ]
+    },
+    {
+      "id": "quartzite",
+      "display": "Quartzite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Metamorphic"
+      ],
+      "images": [
+        "images/quartzite/1.jpg"
+      ]
+    },
+    {
+      "id": "serpentinite",
+      "display": "Serpentinite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Metamorphic"
+      ],
+      "images": [
+        "images/serpentinite/1.jpg"
+      ]
+    },
+    {
+      "id": "slate",
+      "display": "Slate",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Metamorphic"
+      ],
+      "images": [
+        "images/slate/1.jpg"
+      ]
+    },
+    {
+      "id": "talc_schist_soapstone",
+      "display": "Talc Schist (Soapstone)",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Rocks",
+        "Metamorphic"
+      ],
+      "images": [
+        "images/talc_schist_soapstone/1.jpg"
       ]
     }
   ]
