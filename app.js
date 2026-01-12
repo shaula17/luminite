@@ -8,6 +8,8 @@ function normalize(s) {
   return (s || "")
     .trim()
     .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
     .replace(/[^a-z0-9\s-]/g, "")
     .replace(/\s+/g, " ");
 }
@@ -107,7 +109,8 @@ function pickNextSpecimen() {
   const next = choice(list);
 
   // Random image within chosen type
-  const img = choice(next.images);
+  const img = choice(next.images || []);
+  if (!img) return null;
 
   lastId = next.id;
   current = next;
@@ -132,13 +135,17 @@ function setupZoomPan(viewerEl, imgEl) {
     return Math.min(6, Math.max(1, s));
   }
 
+  function zoomBy(delta) {
+    scale = clampScale(scale + delta);
+    apply();
+  }
+
   viewerEl.addEventListener(
     "wheel",
     (e) => {
       e.preventDefault();
       const delta = -Math.sign(e.deltaY) * 0.15;
-      scale = clampScale(scale + delta);
-      apply();
+      zoomBy(delta);
     },
     { passive: false }
   );
@@ -176,12 +183,17 @@ function setupZoomPan(viewerEl, imgEl) {
     apply();
   });
 
-  // Expose reset function when image changes
-  return function reset() {
+  function reset() {
     scale = 1;
     tx = 0;
     ty = 0;
     apply();
+  }
+
+  return {
+    reset,
+    zoomIn: () => zoomBy(0.2),
+    zoomOut: () => zoomBy(-0.2),
   };
 }
 
@@ -223,8 +235,34 @@ const hintBtn = document.getElementById("hintBtn");
 const resetStatsBtn = document.getElementById("resetStatsBtn");
 const sessionStatsEl = document.getElementById("sessionStats");
 const perSpecimenStatsEl = document.getElementById("perSpecimenStats");
+const zoomInBtn = document.getElementById("zoomInBtn");
+const zoomOutBtn = document.getElementById("zoomOutBtn");
+const zoomResetBtn = document.getElementById("zoomResetBtn");
+const formulaModal = document.getElementById("formulaModal");
+const formulaNameEl = document.getElementById("formulaName");
+const formulaTextEl = document.getElementById("formulaText");
+const closeFormulaBtn = document.getElementById("closeFormulaBtn");
 
-let resetZoom = () => {};
+let zoomControls = {
+  reset: () => {},
+  zoomIn: () => {},
+  zoomOut: () => {},
+};
+
+function showFormulaPopup(specimen) {
+  if (!formulaModal || !formulaNameEl || !formulaTextEl) return;
+  formulaNameEl.textContent = specimen.display;
+  const formula = specimen.formula?.trim();
+  formulaTextEl.textContent = formula ? `Formula: ${formula}` : "Formula: Not set";
+  formulaModal.classList.add("show");
+  formulaModal.setAttribute("aria-hidden", "false");
+}
+
+function hideFormulaPopup() {
+  if (!formulaModal) return;
+  formulaModal.classList.remove("show");
+  formulaModal.setAttribute("aria-hidden", "true");
+}
 
 function setFeedback(html, kind) {
   feedbackEl.classList.remove("ok", "bad");
@@ -285,11 +323,19 @@ function renderStats() {
 
 function setMode(mode) {
   MODE = mode;
-  pool = ALL.filter((s) => (s.modes || []).includes(MODE));
+  pool = ALL.filter(
+    (s) =>
+      (s.modes || []).includes(MODE) && Array.isArray(s.images) && s.images.length
+  );
   lastId = null;
 
   stats = loadStats(MODE);
   renderStats();
+
+  if (!pool.length) {
+    setFeedback("No specimens available for this mode.", "bad");
+    return;
+  }
 
   next();
 }
@@ -297,9 +343,10 @@ function setMode(mode) {
 function renderCurrent() {
   if (!current) return;
 
+  imgEl.onload = () => zoomControls.reset();
   imgEl.src = currentImage;
   imgEl.alt = `Specimen image (${current.display})`;
-  resetZoom();
+  zoomControls.reset();
 
   answerInput.value = "";
   answerInput.focus();
@@ -307,7 +354,11 @@ function renderCurrent() {
 }
 
 function next() {
-  pickNextSpecimen();
+  const nextSpecimen = pickNextSpecimen();
+  if (!nextSpecimen) {
+    setFeedback("No specimens available to display.", "bad");
+    return;
+  }
   renderCurrent();
 }
 
@@ -330,6 +381,7 @@ function revealResult(result) {
   } else {
     setFeedback(`❌ Not quite. Correct answer: <b>${correctName}</b>`, "bad");
   }
+  showFormulaPopup(current);
   revealed = true;
 }
 
@@ -349,6 +401,9 @@ function handleSubmit() {
 // ---------- Load Data ----------
 async function init() {
   const resp = await fetch("data/specimens.json");
+  if (!resp.ok) {
+    throw new Error(`Failed to load specimens: ${resp.status}`);
+  }
   const data = await resp.json();
   ALL = data.specimens || [];
 
@@ -361,16 +416,27 @@ async function init() {
   modeSelect.innerHTML = sorted.map((m) => `<option value="${m}">${m}</option>`).join("");
 
   // Default mode
-  MODE = sorted.includes("general") ? "general" : sorted[0] || "general";
+  MODE = sorted.includes("ALL")
+    ? "ALL"
+    : sorted.includes("general")
+    ? "general"
+    : sorted[0] || "ALL";
   modeSelect.value = MODE;
 
   // Setup zoom/pan
-  resetZoom = setupZoomPan(viewerEl, imgEl);
+  zoomControls = setupZoomPan(viewerEl, imgEl);
 
   // Wire events
   modeSelect.addEventListener("change", () => setMode(modeSelect.value));
   submitBtn.addEventListener("click", handleSubmit);
   nextBtn.addEventListener("click", next);
+  zoomInBtn?.addEventListener("click", () => zoomControls.zoomIn());
+  zoomOutBtn?.addEventListener("click", () => zoomControls.zoomOut());
+  zoomResetBtn?.addEventListener("click", () => zoomControls.reset());
+  closeFormulaBtn?.addEventListener("click", hideFormulaPopup);
+  formulaModal?.addEventListener("click", (event) => {
+    if (event.target === formulaModal) hideFormulaPopup();
+  });
 
   answerInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") handleSubmit();
