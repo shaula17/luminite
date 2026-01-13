@@ -16,7 +16,8 @@ button:hover { filter: brightness(1.1); }
 
 .viewer {
   background: #0f1621; border: 1px solid #223042; border-radius: 16px;
-  height: min(70vh, 680px); overflow: hidden; position: relative;
+  height: min(80vh, 760px); overflow: hidden; position: relative;
+
   touch-action: none;
 }
 .viewer img {

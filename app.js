@@ -122,13 +122,15 @@ function pickNextSpecimen() {
 // ---------- Zoom & Pan ----------
 function setupZoomPan(viewerEl, imgEl) {
   let scale = 1;
+  let baseScale = 1;
   let tx = 0, ty = 0;
   let dragging = false;
   let lastX = 0, lastY = 0;
 
   function apply() {
+    const finalScale = baseScale * scale;
     imgEl.style.transform =
-      `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(${scale})`;
+      `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(${finalScale})`;
   }
 
   function clampScale(s) {
@@ -183,7 +185,13 @@ function setupZoomPan(viewerEl, imgEl) {
     apply();
   });
 
-  function reset() {
+  function fitToViewer() {
+    const viewerW = viewerEl.clientWidth;
+    const viewerH = viewerEl.clientHeight;
+    const imgW = imgEl.naturalWidth;
+    const imgH = imgEl.naturalHeight;
+    if (!viewerW || !viewerH || !imgW || !imgH) return;
+    baseScale = Math.min(viewerW / imgW, viewerH / imgH, 1);
     scale = 1;
     tx = 0;
     ty = 0;
@@ -191,7 +199,7 @@ function setupZoomPan(viewerEl, imgEl) {
   }
 
   return {
-    reset,
+    reset: fitToViewer,
     zoomIn: () => zoomBy(0.2),
     zoomOut: () => zoomBy(-0.2),
   };
