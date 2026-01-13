@@ -239,6 +239,7 @@ const zoomInBtn = document.getElementById("zoomInBtn");
 const zoomOutBtn = document.getElementById("zoomOutBtn");
 const zoomResetBtn = document.getElementById("zoomResetBtn");
 const formulaModal = document.getElementById("formulaModal");
+const formulaResultEl = document.getElementById("formulaResult");
 const formulaNameEl = document.getElementById("formulaName");
 const formulaTextEl = document.getElementById("formulaText");
 const closeFormulaBtn = document.getElementById("closeFormulaBtn");
@@ -249,11 +250,15 @@ let zoomControls = {
   zoomOut: () => {},
 };
 
-function showFormulaPopup(specimen) {
-  if (!formulaModal || !formulaNameEl || !formulaTextEl) return;
+function showFormulaPopup(specimen, result) {
+  if (!formulaModal || !formulaNameEl || !formulaTextEl || !formulaResultEl) return;
   formulaNameEl.textContent = specimen.display;
   const formula = specimen.formula?.trim();
   formulaTextEl.textContent = formula ? `Formula: ${formula}` : "Formula: Not set";
+  formulaResultEl.classList.remove("ok", "bad");
+  const resultText = result?.ok ? "Correct ✅" : "Not quite ❌";
+  formulaResultEl.textContent = resultText;
+  formulaResultEl.classList.add(result?.ok ? "ok" : "bad");
   formulaModal.classList.add("show");
   formulaModal.setAttribute("aria-hidden", "false");
 }
@@ -262,6 +267,10 @@ function hideFormulaPopup() {
   if (!formulaModal) return;
   formulaModal.classList.remove("show");
   formulaModal.setAttribute("aria-hidden", "true");
+  if (formulaResultEl) {
+    formulaResultEl.textContent = "";
+    formulaResultEl.classList.remove("ok", "bad");
+  }
 }
 
 function setFeedback(html, kind) {
@@ -343,6 +352,7 @@ function setMode(mode) {
 function renderCurrent() {
   if (!current) return;
 
+  hideFormulaPopup();
   imgEl.onload = () => zoomControls.reset();
   imgEl.src = currentImage;
   imgEl.alt = `Specimen image (${current.display})`;
@@ -354,6 +364,7 @@ function renderCurrent() {
 }
 
 function next() {
+  hideFormulaPopup();
   const nextSpecimen = pickNextSpecimen();
   if (!nextSpecimen) {
     setFeedback("No specimens available to display.", "bad");
@@ -381,7 +392,7 @@ function revealResult(result) {
   } else {
     setFeedback(`❌ Not quite. Correct answer: <b>${correctName}</b>`, "bad");
   }
-  showFormulaPopup(current);
+  showFormulaPopup(current, result);
   revealed = true;
 }
 
@@ -400,7 +411,13 @@ function handleSubmit() {
 
 // ---------- Load Data ----------
 async function init() {
-  const resp = await fetch("data/specimens.json");
+  let basePath = window.location.pathname;
+  if (!basePath.endsWith("/")) {
+    basePath = basePath.includes(".") ? basePath.replace(/[^/]*$/, "") : `${basePath}/`;
+  }
+  const dataUrl = new URL("data/specimens.json", `${window.location.origin}${basePath}`);
+
+  const resp = await fetch(dataUrl);
   if (!resp.ok) {
     throw new Error(`Failed to load specimens: ${resp.status}`);
   }
