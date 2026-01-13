@@ -10,6 +10,7 @@ select, input, button {
 }
 button { cursor: pointer; }
 button:hover { filter: brightness(1.1); }
+.hidden { display: none; }
 
 .card { margin-top: 14px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 14px; }
 @media (max-width: 900px){ .card { grid-template-columns: 1fr; } }
@@ -109,6 +110,56 @@ button:hover { filter: brightness(1.1); }
 .modalBody {
   display: grid;
   gap: 6px;
+}
+.modalCard--giant {
+  width: min(980px, 95vw);
+  height: min(85vh, 880px);
+  display: flex;
+  flex-direction: column;
+}
+.modalBody--giant {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+}
+.modalNote {
+  margin: 0;
+  opacity: 0.85;
+}
+.modalError {
+  min-height: 22px;
+  color: #ffb1b1;
+  font-weight: 600;
+}
+.mineralGrid {
+  flex: 1;
+  overflow: auto;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid #223042;
+  background: #0b111a;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 10px;
+}
+.mineralOption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: 1px solid #223042;
+  background: #0f1621;
+}
+.mineralOption input {
+  width: 18px;
+  height: 18px;
+}
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
 }
 .formulaResult {
   font-weight: 600;
