@@ -122,13 +122,15 @@ function pickNextSpecimen() {
 // ---------- Zoom & Pan ----------
 function setupZoomPan(viewerEl, imgEl) {
   let scale = 1;
+  let baseScale = 1;
   let tx = 0, ty = 0;
   let dragging = false;
   let lastX = 0, lastY = 0;
 
   function apply() {
+    const finalScale = baseScale * scale;
     imgEl.style.transform =
-      `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(${scale})`;
+      `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(${finalScale})`;
   }
 
   function clampScale(s) {
@@ -183,7 +185,13 @@ function setupZoomPan(viewerEl, imgEl) {
     apply();
   });
 
-  function reset() {
+  function fitToViewer() {
+    const viewerW = viewerEl.clientWidth;
+    const viewerH = viewerEl.clientHeight;
+    const imgW = imgEl.naturalWidth;
+    const imgH = imgEl.naturalHeight;
+    if (!viewerW || !viewerH || !imgW || !imgH) return;
+    baseScale = Math.min(viewerW / imgW, viewerH / imgH, 1);
     scale = 1;
     tx = 0;
     ty = 0;
@@ -191,7 +199,7 @@ function setupZoomPan(viewerEl, imgEl) {
   }
 
   return {
-    reset,
+    reset: fitToViewer,
     zoomIn: () => zoomBy(0.2),
     zoomOut: () => zoomBy(-0.2),
   };
@@ -239,6 +247,7 @@ const zoomInBtn = document.getElementById("zoomInBtn");
 const zoomOutBtn = document.getElementById("zoomOutBtn");
 const zoomResetBtn = document.getElementById("zoomResetBtn");
 const formulaModal = document.getElementById("formulaModal");
+const formulaResultEl = document.getElementById("formulaResult");
 const formulaNameEl = document.getElementById("formulaName");
 const formulaTextEl = document.getElementById("formulaText");
 const closeFormulaBtn = document.getElementById("closeFormulaBtn");
@@ -249,11 +258,15 @@ let zoomControls = {
   zoomOut: () => {},
 };
 
-function showFormulaPopup(specimen) {
-  if (!formulaModal || !formulaNameEl || !formulaTextEl) return;
+function showFormulaPopup(specimen, result) {
+  if (!formulaModal || !formulaNameEl || !formulaTextEl || !formulaResultEl) return;
   formulaNameEl.textContent = specimen.display;
   const formula = specimen.formula?.trim();
   formulaTextEl.textContent = formula ? `Formula: ${formula}` : "Formula: Not set";
+  formulaResultEl.classList.remove("ok", "bad");
+  const resultText = result?.ok ? "Correct ✅" : "Not quite ❌";
+  formulaResultEl.textContent = resultText;
+  formulaResultEl.classList.add(result?.ok ? "ok" : "bad");
   formulaModal.classList.add("show");
   formulaModal.setAttribute("aria-hidden", "false");
 }
@@ -262,6 +275,10 @@ function hideFormulaPopup() {
   if (!formulaModal) return;
   formulaModal.classList.remove("show");
   formulaModal.setAttribute("aria-hidden", "true");
+  if (formulaResultEl) {
+    formulaResultEl.textContent = "";
+    formulaResultEl.classList.remove("ok", "bad");
+  }
 }
 
 function setFeedback(html, kind) {
@@ -343,6 +360,7 @@ function setMode(mode) {
 function renderCurrent() {
   if (!current) return;
 
+  hideFormulaPopup();
   imgEl.onload = () => zoomControls.reset();
   imgEl.src = currentImage;
   imgEl.alt = `Specimen image (${current.display})`;
@@ -354,6 +372,7 @@ function renderCurrent() {
 }
 
 function next() {
+  hideFormulaPopup();
   const nextSpecimen = pickNextSpecimen();
   if (!nextSpecimen) {
     setFeedback("No specimens available to display.", "bad");
@@ -381,7 +400,7 @@ function revealResult(result) {
   } else {
     setFeedback(`❌ Not quite. Correct answer: <b>${correctName}</b>`, "bad");
   }
-  showFormulaPopup(current);
+  showFormulaPopup(current, result);
   revealed = true;
 }
 
@@ -400,7 +419,13 @@ function handleSubmit() {
 
 // ---------- Load Data ----------
 async function init() {
-  const resp = await fetch("data/specimens.json");
+  let basePath = window.location.pathname;
+  if (!basePath.endsWith("/")) {
+    basePath = basePath.includes(".") ? basePath.replace(/[^/]*$/, "") : `${basePath}/`;
+  }
+  const dataUrl = new URL("data/specimens.json", `${window.location.origin}${basePath}`);
+
+  const resp = await fetch(dataUrl);
   if (!resp.ok) {
     throw new Error(`Failed to load specimens: ${resp.status}`);
   }
