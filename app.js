@@ -95,6 +95,9 @@ let revealed = false;
 
 let stats = {}; // { [specimenId]: { seen: number, correct: number } }
 
+const CUSTOM_MINERALS_MODE = "Custom Minerals";
+const CUSTOM_MINERALS_KEY = "rmtrainer_custom_minerals_v1";
+
 // Even weighting:
 // - pick specimen TYPES evenly (each type has equal chance)
 // - once type chosen, pick random image within that type
@@ -251,6 +254,12 @@ const formulaResultEl = document.getElementById("formulaResult");
 const formulaNameEl = document.getElementById("formulaName");
 const formulaTextEl = document.getElementById("formulaText");
 const closeFormulaBtn = document.getElementById("closeFormulaBtn");
+const customizeBtn = document.getElementById("customizeBtn");
+const customMineralsModal = document.getElementById("customMineralsModal");
+const customMineralsList = document.getElementById("customMineralsList");
+const customMineralsConfirm = document.getElementById("customMineralsConfirm");
+const customMineralsClose = document.getElementById("customMineralsClose");
+const customMineralsError = document.getElementById("customMineralsError");
 
 let zoomControls = {
   reset: () => {},
@@ -338,20 +347,91 @@ function renderStats() {
     .join("");
 }
 
-function setMode(mode) {
+function updateCustomizeButton() {
+  if (!customizeBtn) return;
+  customizeBtn.classList.toggle("hidden", MODE !== CUSTOM_MINERALS_MODE);
+}
+
+function getMineralSpecimens() {
+  return ALL.filter((s) => (s.modes || []).includes("Minerals"));
+}
+
+function loadCustomMineralIds() {
+  try {
+    const raw = localStorage.getItem(CUSTOM_MINERALS_KEY);
+    const parsed = JSON.parse(raw || "[]");
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveCustomMineralIds(ids) {
+  localStorage.setItem(CUSTOM_MINERALS_KEY, JSON.stringify(ids));
+}
+
+function getCustomMineralIds() {
+  const stored = loadCustomMineralIds();
+  if (stored.length) return stored;
+  return getMineralSpecimens().map((s) => s.id);
+}
+
+function renderCustomMineralsModal() {
+  if (!customMineralsList) return;
+  const minerals = getMineralSpecimens().sort((a, b) => a.display.localeCompare(b.display));
+  const selected = new Set(getCustomMineralIds());
+  customMineralsList.innerHTML = minerals
+    .map(
+      (mineral) => `
+        <label class="mineralOption">
+          <input type="checkbox" value="${mineral.id}" ${selected.has(mineral.id) ? "checked" : ""} />
+          <span>${mineral.display}</span>
+        </label>
+      `
+    )
+    .join("");
+}
+
+function showCustomMineralsModal() {
+  if (!customMineralsModal) return;
+  if (customMineralsError) customMineralsError.textContent = "";
+  renderCustomMineralsModal();
+  customMineralsModal.classList.add("show");
+  customMineralsModal.setAttribute("aria-hidden", "false");
+}
+
+function hideCustomMineralsModal() {
+  if (!customMineralsModal) return;
+  customMineralsModal.classList.remove("show");
+  customMineralsModal.setAttribute("aria-hidden", "true");
+}
+
+function setMode(mode, options = {}) {
   MODE = mode;
-  pool = ALL.filter(
-    (s) =>
-      (s.modes || []).includes(MODE) && Array.isArray(s.images) && s.images.length
-  );
+  if (MODE === CUSTOM_MINERALS_MODE) {
+    const allowed = new Set(getCustomMineralIds());
+    pool = getMineralSpecimens().filter(
+      (s) => allowed.has(s.id) && Array.isArray(s.images) && s.images.length
+    );
+  } else {
+    pool = ALL.filter(
+      (s) =>
+        (s.modes || []).includes(MODE) && Array.isArray(s.images) && s.images.length
+    );
+  }
   lastId = null;
 
   stats = loadStats(MODE);
   renderStats();
+  updateCustomizeButton();
 
   if (!pool.length) {
     setFeedback("No specimens available for this mode.", "bad");
     return;
+  }
+
+  if (MODE === CUSTOM_MINERALS_MODE && !options.skipModal) {
+    showCustomMineralsModal();
   }
 
   next();
@@ -437,6 +517,7 @@ async function init() {
   for (const s of ALL) for (const m of s.modes || []) modes.add(m);
 
   // Populate dropdown
+  modes.add(CUSTOM_MINERALS_MODE);
   const sorted = Array.from(modes).sort();
   modeSelect.innerHTML = sorted.map((m) => `<option value="${m}">${m}</option>`).join("");
 
@@ -452,7 +533,14 @@ async function init() {
   zoomControls = setupZoomPan(viewerEl, imgEl);
 
   // Wire events
-  modeSelect.addEventListener("change", () => setMode(modeSelect.value));
+  modeSelect.addEventListener("change", () => {
+    const nextMode = modeSelect.value;
+    if (nextMode === CUSTOM_MINERALS_MODE) {
+      showCustomMineralsModal();
+      return;
+    }
+    setMode(nextMode);
+  });
   submitBtn.addEventListener("click", handleSubmit);
   nextBtn.addEventListener("click", next);
   zoomInBtn?.addEventListener("click", () => zoomControls.zoomIn());
@@ -461,6 +549,30 @@ async function init() {
   closeFormulaBtn?.addEventListener("click", hideFormulaPopup);
   formulaModal?.addEventListener("click", (event) => {
     if (event.target === formulaModal) hideFormulaPopup();
+  });
+  customizeBtn?.addEventListener("click", showCustomMineralsModal);
+  customMineralsClose?.addEventListener("click", () => {
+    hideCustomMineralsModal();
+    modeSelect.value = MODE;
+  });
+  customMineralsModal?.addEventListener("click", (event) => {
+    if (event.target === customMineralsModal) hideCustomMineralsModal();
+  });
+  customMineralsConfirm?.addEventListener("click", () => {
+    if (!customMineralsList) return;
+    const checked = Array.from(
+      customMineralsList.querySelectorAll('input[type="checkbox"]:checked')
+    ).map((input) => input.value);
+    if (!checked.length) {
+      if (customMineralsError) {
+        customMineralsError.textContent = "Select at least one mineral to continue.";
+      }
+      return;
+    }
+    saveCustomMineralIds(checked);
+    hideCustomMineralsModal();
+    modeSelect.value = CUSTOM_MINERALS_MODE;
+    setMode(CUSTOM_MINERALS_MODE, { skipModal: true });
   });
 
   answerInput.addEventListener("keydown", (e) => {

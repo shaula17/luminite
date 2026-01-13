@@ -18,6 +18,7 @@
           <select id="modeSelect"></select>
         </label>
 
+        <button id="customizeBtn" class="hidden" type="button">Choose minerals</button>
         <button id="nextBtn" type="button">Next</button>
       </div>
     </header>
@@ -74,6 +75,23 @@
         <div class="formulaResult" id="formulaResult"></div>
         <div class="formulaName" id="formulaName"></div>
         <div class="formulaText" id="formulaText"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="customMineralsModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modalCard modalCard--giant" role="document">
+      <div class="modalHeader">
+        <h2 id="customMineralsTitle">Choose minerals to practice</h2>
+        <button id="customMineralsClose" type="button" aria-label="Close mineral selection">✕</button>
+      </div>
+      <div class="modalBody modalBody--giant">
+        <p class="modalNote">Select the minerals you want in the practice pool.</p>
+        <div id="customMineralsError" class="modalError" role="status" aria-live="polite"></div>
+        <div id="customMineralsList" class="mineralGrid" aria-label="Mineral list"></div>
+        <div class="modalActions">
+          <button id="customMineralsConfirm" type="button">Confirm selection</button>
+        </div>
       </div>
     </div>
   </div>
