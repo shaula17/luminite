@@ -30,7 +30,11 @@ body {
 .top h1 {
   margin: 0;
   letter-spacing: 0.04em;
-  text-shadow: 0 0 12px rgba(127, 229, 255, 0.35);
+  background: linear-gradient(120deg, var(--accent), var(--accent-soft) 45%, var(--accent-strong));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 18px rgba(127, 229, 255, 0.35);
 }
 .controls { display: flex; gap: 10px; align-items: center; }
 select, input, button {
