@@ -343,6 +343,7 @@ function setMode(mode) {
 function renderCurrent() {
   if (!current) return;
 
+  hideFormulaPopup();
   imgEl.onload = () => zoomControls.reset();
   imgEl.src = currentImage;
   imgEl.alt = `Specimen image (${current.display})`;
@@ -354,6 +355,7 @@ function renderCurrent() {
 }
 
 function next() {
+  hideFormulaPopup();
   const nextSpecimen = pickNextSpecimen();
   if (!nextSpecimen) {
     setFeedback("No specimens available to display.", "bad");
@@ -400,7 +402,13 @@ function handleSubmit() {
 
 // ---------- Load Data ----------
 async function init() {
-  const resp = await fetch("data/specimens.json");
+  let basePath = window.location.pathname;
+  if (!basePath.endsWith("/")) {
+    basePath = basePath.includes(".") ? basePath.replace(/[^/]*$/, "") : `${basePath}/`;
+  }
+  const dataUrl = new URL("data/specimens.json", `${window.location.origin}${basePath}`);
+
+  const resp = await fetch(dataUrl);
   if (!resp.ok) {
     throw new Error(`Failed to load specimens: ${resp.status}`);
   }
