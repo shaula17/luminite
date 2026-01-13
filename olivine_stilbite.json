@@ -1,0 +1,29 @@
+{
+  "specimens": [
+    {
+      "id": "olivine",
+      "display": "Olivine",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+
+      ]
+    },
+    {
+      "id": "stilbite",
+      "display": "Stilbite",
+      "aliases": [],
+      "modes": [
+        "ALL",
+        "Minerals",
+        "Silicates"
+      ],
+      "images": [
+
+      ]
+  ]
+}
