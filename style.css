@@ -109,6 +109,15 @@ button:hover { filter: brightness(1.1); }
   display: grid;
   gap: 6px;
 }
+.formulaResult {
+  font-weight: 600;
+}
+.formulaResult.ok {
+  color: #7ee29b;
+}
+.formulaResult.bad {
+  color: #ff8c8c;
+}
 .formulaName {
   font-weight: 600;
 }
