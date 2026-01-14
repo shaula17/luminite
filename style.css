@@ -51,7 +51,7 @@ input:focus-visible {
 @media (max-width: 900px){ .card { grid-template-columns: 1fr; } }
 
 .viewer {
-  background: linear-gradient(165deg, var(--panel), var(--panel-glow));
+  background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 16px;
   height: min(80vh, 760px);
@@ -85,7 +85,7 @@ input:focus-visible {
 }
 
 .qa {
-  background: linear-gradient(165deg, var(--panel), var(--panel-glow));
+  background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 14px;
@@ -139,7 +139,7 @@ input:focus-visible {
 }
 .modalCard {
   width: min(420px, 92vw);
-  background: linear-gradient(165deg, var(--panel), var(--panel-glow));
+  background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 14px;
