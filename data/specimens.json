@@ -13057,7 +13057,7 @@
     {
       "id": "banded_iron_formation",
       "display": "Banded Iron Formation",
-      "aliases": [],
+      "aliases": ["bifs","bif"],
       "modes": [
         "ALL",
         "Rocks",
