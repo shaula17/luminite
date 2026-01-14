@@ -257,6 +257,7 @@ const closeFormulaBtn = document.getElementById("closeFormulaBtn");
 const customizeBtn = document.getElementById("customizeBtn");
 const customMineralsModal = document.getElementById("customMineralsModal");
 const customMineralsList = document.getElementById("customMineralsList");
+const customMineralsUnselect = document.getElementById("customMineralsUnselect");
 const customMineralsConfirm = document.getElementById("customMineralsConfirm");
 const customMineralsClose = document.getElementById("customMineralsClose");
 const customMineralsError = document.getElementById("customMineralsError");
@@ -387,6 +388,15 @@ function renderCustomMineralsModal() {
       `
     )
     .join("");
+  updateCustomMineralsConfirmState();
+}
+
+function updateCustomMineralsConfirmState() {
+  if (!customMineralsList || !customMineralsConfirm) return;
+  const hasSelection =
+    customMineralsList.querySelectorAll('input[type="checkbox"]:checked').length > 0;
+  customMineralsConfirm.disabled = !hasSelection;
+  if (hasSelection && customMineralsError) customMineralsError.textContent = "";
 }
 
 function showCustomMineralsModal() {
@@ -555,6 +565,9 @@ async function init() {
   customMineralsModal?.addEventListener("click", (event) => {
     if (event.target === customMineralsModal) hideCustomMineralsModal();
   });
+  customMineralsList?.addEventListener("change", () => {
+    updateCustomMineralsConfirmState();
+  });
   customMineralsConfirm?.addEventListener("click", () => {
     if (!customMineralsList) return;
     const checked = Array.from(
@@ -570,6 +583,15 @@ async function init() {
     hideCustomMineralsModal();
     modeSelect.value = CUSTOM_MINERALS_MODE;
     setMode(CUSTOM_MINERALS_MODE, { skipModal: true });
+  });
+  customMineralsUnselect?.addEventListener("click", () => {
+    if (!customMineralsList) return;
+    customMineralsList
+      .querySelectorAll('input[type="checkbox"]')
+      .forEach((input) => {
+        input.checked = false;
+      });
+    updateCustomMineralsConfirmState();
   });
 
   answerInput.addEventListener("keydown", (e) => {
