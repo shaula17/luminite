@@ -13985,7 +13985,7 @@
       ]
     },
     {
-      "id": "limestone_chalk",
+      "id": "chalk",
       "display": "Limestone \u2013 Chalk",
       "aliases": [],
       "modes": [
@@ -14005,7 +14005,7 @@
       ]
     },
     {
-      "id": "limestone_coquina",
+      "id": "coquina",
       "display": "Limestone \u2013 Coquina",
       "aliases": [],
       "modes": [
@@ -14081,7 +14081,7 @@
       ]
     },
     {
-      "id": "limestone_fossil_limestone",
+      "id": "fossil_limestone",
       "display": "Limestone \u2013 Fossil Limestone",
       "aliases": [],
       "modes": [
@@ -14157,7 +14157,7 @@
       ]
     },
     {
-      "id": "limestone_oolitic_limestone",
+      "id": "oolitic_limestone",
       "display": "Limestone \u2013 Oolitic Limestone",
       "aliases": [],
       "modes": [
@@ -14241,7 +14241,7 @@
       ]
     },
     {
-      "id": "limestone_travertine",
+      "id": "travertine",
       "display": "Limestone \u2013 Travertine",
       "aliases": [],
       "modes": [
