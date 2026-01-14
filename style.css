@@ -1,19 +1,17 @@
 :root {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   color-scheme: dark;
-  --bg-deep: #06070d;
-  --bg-mid: #0a1020;
-  --bg-glow: #1c2754;
-  --panel: #0d1529;
-  --panel-glow: #172648;
-  --border: #2d3a5c;
-  --accent: #7fe5ff;
-  --accent-soft: #a3b4ff;
-  --accent-strong: #7b5cff;
-  --text-main: #e8f0ff;
-  --text-muted: #b7c2e1;
-  --success: #6fe0b2;
-  --danger: #ff9aa6;
+  --bg-deep: #0d081f;
+  --panel: #201e1d;
+  --panel-glow: #372d5a;
+  --border: #4d7b77;
+  --accent: #5ee5a3;
+  --accent-soft: #9af8e0;
+  --accent-strong: #e5daba;
+  --text-main: #e5daba;
+  --text-muted: #9af8e0;
+  --success: #5ee5a3;
+  --danger: #9af8e0;
 }
 body {
   margin: 0;
@@ -30,11 +28,8 @@ body {
 .top h1 {
   margin: 0;
   letter-spacing: 0.04em;
-  background: linear-gradient(120deg, var(--accent), var(--accent-soft) 45%, var(--accent-strong));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  text-shadow: 0 0 18px rgba(127, 229, 255, 0.35);
+  color: var(--accent-strong);
+  text-shadow: 0 0 16px rgba(94, 229, 163, 0.35);
 }
 .controls { display: flex; gap: 10px; align-items: center; }
 select, input, button {
@@ -42,16 +37,16 @@ select, input, button {
   padding: 10px 12px;
   border-radius: 10px;
   border: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(23, 38, 72, 0.9), rgba(13, 21, 41, 0.9));
+  background: rgba(55, 45, 90, 0.75);
   color: var(--text-main);
-  box-shadow: inset 0 0 0 1px rgba(127, 229, 255, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(154, 248, 224, 0.08);
 }
 button { cursor: pointer; }
 button:hover { filter: brightness(1.08); }
 button:focus-visible,
 select:focus-visible,
 input:focus-visible {
-  outline: 2px solid rgba(127, 229, 255, 0.6);
+  outline: 2px solid rgba(94, 229, 163, 0.6);
   outline-offset: 2px;
 }
 .hidden { display: none; }
@@ -66,7 +61,7 @@ input:focus-visible {
   height: min(80vh, 760px);
   overflow: hidden;
   position: relative;
-  box-shadow: 0 0 30px rgba(16, 32, 64, 0.5);
+  box-shadow: 0 0 30px rgba(55, 45, 90, 0.35);
 
   touch-action: none;
 }
@@ -89,7 +84,7 @@ input:focus-visible {
 .viewerControls button {
   padding: 8px 10px;
   border-radius: 10px;
-  background: rgba(16, 26, 46, 0.95);
+  background: rgba(32, 30, 29, 0.9);
   border: 1px solid var(--border);
 }
 
@@ -98,7 +93,7 @@ input:focus-visible {
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 14px;
-  box-shadow: 0 0 28px rgba(16, 32, 64, 0.45);
+  box-shadow: 0 0 28px rgba(55, 45, 90, 0.35);
 }
 .prompt { display:block; margin-bottom: 8px; opacity: 0.9; color: var(--text-muted); }
 .row { display:flex; gap: 10px; }
@@ -109,7 +104,7 @@ input:focus-visible {
   min-height: 44px;
   padding: 10px 12px;
   border-radius: 12px;
-  background: rgba(11, 17, 34, 0.85);
+  background: rgba(32, 30, 29, 0.85);
   border: 1px dashed var(--border);
 }
 .feedback.ok { border-style: solid; border-color: var(--success); }
@@ -124,7 +119,7 @@ input:focus-visible {
   display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center;
   padding: 8px 10px;
   border-radius: 12px;
-  background: rgba(11, 17, 34, 0.85);
+  background: rgba(32, 30, 29, 0.85);
   border: 1px solid var(--border);
 }
 .statRow .name { opacity: 0.95; }
@@ -136,7 +131,7 @@ input:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(7, 10, 20, 0.72);
+  background: rgba(13, 8, 31, 0.78);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease;
@@ -152,7 +147,7 @@ input:focus-visible {
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 14px;
-  box-shadow: 0 14px 40px rgba(8, 12, 24, 0.65);
+  box-shadow: 0 14px 40px rgba(13, 8, 31, 0.6);
 }
 .modalHeader {
   display: flex;
@@ -193,7 +188,7 @@ input:focus-visible {
 }
 .modalError {
   min-height: 22px;
-  color: var(--danger);
+  color: var(--accent-soft);
   font-weight: 600;
 }
 .mineralGrid {
@@ -202,7 +197,7 @@ input:focus-visible {
   padding: 12px;
   border-radius: 14px;
   border: 1px solid var(--border);
-  background: rgba(11, 17, 34, 0.85);
+  background: rgba(32, 30, 29, 0.85);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 10px;
@@ -214,7 +209,7 @@ input:focus-visible {
   padding: 8px 10px;
   border-radius: 12px;
   border: 1px solid var(--border);
-  background: rgba(13, 21, 41, 0.95);
+  background: rgba(55, 45, 90, 0.65);
 }
 .mineralOption input {
   width: 18px;
@@ -231,7 +226,7 @@ input:focus-visible {
   color: var(--success);
 }
 .formulaResult.bad {
-  color: var(--danger);
+  color: var(--accent-soft);
 }
 .formulaName {
   font-weight: 600;
