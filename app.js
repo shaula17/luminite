@@ -257,6 +257,7 @@ const closeFormulaBtn = document.getElementById("closeFormulaBtn");
 const customizeBtn = document.getElementById("customizeBtn");
 const customMineralsModal = document.getElementById("customMineralsModal");
 const customMineralsList = document.getElementById("customMineralsList");
+const customMineralsUnselect = document.getElementById("customMineralsUnselect");
 const customMineralsConfirm = document.getElementById("customMineralsConfirm");
 const customMineralsClose = document.getElementById("customMineralsClose");
 const customMineralsError = document.getElementById("customMineralsError");
@@ -570,6 +571,15 @@ async function init() {
     hideCustomMineralsModal();
     modeSelect.value = CUSTOM_MINERALS_MODE;
     setMode(CUSTOM_MINERALS_MODE, { skipModal: true });
+  });
+  customMineralsUnselect?.addEventListener("click", () => {
+    if (!customMineralsList) return;
+    customMineralsList
+      .querySelectorAll('input[type="checkbox"]')
+      .forEach((input) => {
+        input.checked = false;
+      });
+    if (customMineralsError) customMineralsError.textContent = "";
   });
 
   answerInput.addEventListener("keydown", (e) => {

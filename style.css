@@ -213,7 +213,8 @@ input:focus-visible {
 }
 .modalActions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  gap: 12px;
 }
 .formulaResult {
   font-weight: 600;
