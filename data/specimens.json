@@ -13986,7 +13986,7 @@
     },
     {
       "id": "chalk",
-      "display": "Limestone \u2013 Chalk",
+      "display": "Chalk",
       "aliases": [],
       "modes": [
         "ALL",
@@ -14006,7 +14006,7 @@
     },
     {
       "id": "coquina",
-      "display": "Limestone \u2013 Coquina",
+      "display": "Coquina",
       "aliases": [],
       "modes": [
         "ALL",
@@ -14082,7 +14082,7 @@
     },
     {
       "id": "fossil_limestone",
-      "display": "Limestone \u2013 Fossil Limestone",
+      "display": "Fossil Limestone",
       "aliases": [],
       "modes": [
         "ALL",
@@ -14158,7 +14158,7 @@
     },
     {
       "id": "oolitic_limestone",
-      "display": "Limestone \u2013 Oolitic Limestone",
+      "display": "Oolitic Limestone",
       "aliases": [],
       "modes": [
         "ALL",
@@ -14242,7 +14242,7 @@
     },
     {
       "id": "travertine",
-      "display": "Limestone \u2013 Travertine",
+      "display": "Travertine",
       "aliases": [],
       "modes": [
         "ALL",
@@ -14399,8 +14399,8 @@
       ]
     },
     {
-      "id": "sandstone_arkose",
-      "display": "Sandstone \u2013 Arkose",
+      "id": "arkose",
+      "display": "Arkose",
       "aliases": [],
       "modes": [
         "ALL",
@@ -14415,8 +14415,8 @@
       ]
     },
     {
-      "id": "sandstone_greywacke",
-      "display": "Sandstone \u2013 Greywacke",
+      "id": "greywacke",
+      "display": "Greywacke",
       "aliases": [],
       "modes": [
         "ALL",
@@ -14441,8 +14441,8 @@
       ]
     },
     {
-      "id": "sandstone_quartz_sandstone",
-      "display": "Sandstone \u2013 Quartz Sandstone",
+      "id": "quartz_sandstone",
+      "display": "Quartz Sandstone",
       "aliases": [],
       "modes": [
         "ALL",
