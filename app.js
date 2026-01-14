@@ -388,6 +388,15 @@ function renderCustomMineralsModal() {
       `
     )
     .join("");
+  updateCustomMineralsConfirmState();
+}
+
+function updateCustomMineralsConfirmState() {
+  if (!customMineralsList || !customMineralsConfirm) return;
+  const hasSelection =
+    customMineralsList.querySelectorAll('input[type="checkbox"]:checked').length > 0;
+  customMineralsConfirm.disabled = !hasSelection;
+  if (hasSelection && customMineralsError) customMineralsError.textContent = "";
 }
 
 function showCustomMineralsModal() {
@@ -556,6 +565,9 @@ async function init() {
   customMineralsModal?.addEventListener("click", (event) => {
     if (event.target === customMineralsModal) hideCustomMineralsModal();
   });
+  customMineralsList?.addEventListener("change", () => {
+    updateCustomMineralsConfirmState();
+  });
   customMineralsConfirm?.addEventListener("click", () => {
     if (!customMineralsList) return;
     const checked = Array.from(
@@ -579,7 +591,7 @@ async function init() {
       .forEach((input) => {
         input.checked = false;
       });
-    if (customMineralsError) customMineralsError.textContent = "";
+    updateCustomMineralsConfirmState();
   });
 
   answerInput.addEventListener("keydown", (e) => {
