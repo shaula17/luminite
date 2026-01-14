@@ -16,11 +16,7 @@
 body {
   margin: 0;
   color: var(--text-main);
-  background:
-    radial-gradient(circle at top, rgba(123, 92, 255, 0.2), transparent 55%),
-    radial-gradient(circle at 18% 25%, rgba(127, 229, 255, 0.2), transparent 45%),
-    radial-gradient(circle at 80% 20%, rgba(163, 180, 255, 0.12), transparent 50%),
-    linear-gradient(160deg, var(--bg-deep), var(--bg-mid) 55%, #08101f);
+  background: var(--bg-deep);
 }
 .wrap { max-width: 980px; margin: 0 auto; padding: 18px; }
 

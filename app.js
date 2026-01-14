@@ -324,15 +324,12 @@ function renderStats() {
     };
   });
 
-  // Sort: never-seen first, then lowest accuracy first
+  // Sort: highest accuracy first, unseen last
   rows.sort((a, b) => {
-    const aUnseen = a.seen === 0,
-      bUnseen = b.seen === 0;
-    if (aUnseen && !bUnseen) return -1;
-    if (!aUnseen && bUnseen) return 1;
-    const ap = a.acc ?? 1;
-    const bp = b.acc ?? 1;
-    return ap - bp;
+    const ap = a.seen ? a.acc ?? 0 : -1;
+    const bp = b.seen ? b.acc ?? 0 : -1;
+    if (bp !== ap) return bp - ap;
+    return a.name.localeCompare(b.name);
   });
 
   perSpecimenStatsEl.innerHTML = rows
