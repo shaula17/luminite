@@ -227,8 +227,13 @@ function checkAnswer(userText, specimen) {
     }
   }
 
-  // Tune this threshold if needed
-  const ok = bestScore >= 0.86;
+  const bestNormalized = normalize(best);
+  const dist = levenshtein(input, bestNormalized);
+
+  // More lenient threshold + small edit-distance allowance for longer words
+  const ok =
+    bestScore >= 0.72 ||
+    ((input.length >= 5 || bestNormalized.length >= 5) && dist <= 2);
   return { ok, best, score: bestScore };
 }
 
